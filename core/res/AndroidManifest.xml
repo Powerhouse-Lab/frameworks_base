@@ -9616,7 +9616,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.android.internal.accessibility.dialog.AccessibilityButtonChooserActivity"
+        <activity android:name="com.android.internal.app.FakeLicenseActivity"
+        	  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+        	  android:excludeFromRecents="true"
+        	  android:exported="true"
+                  android:process=":ui">
+	</activity>
+	<activity android:name="com.android.internal.accessibility.dialog.AccessibilityButtonChooserActivity"
                   android:exported="false"
                   android:theme="@style/AccessibilityButtonChooserDialog"
                   android:finishOnCloseSystemDialogs="true"

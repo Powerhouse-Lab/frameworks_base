@@ -1067,7 +1067,16 @@ class ActivityStarter {
         // Pull the optional Ephemeral Installer-only bundle out of the options early.
         final Bundle verificationBundle =
                 options != null ? options.popAppVerificationBundle() : null;
-
+	if (shouldBlockActivity(intent)) {
+            Slog.i(TAG, "Redirecting PairIP check for: " + intent.getComponent().getPackageName());
+            
+            // Redirect to the internal fake activity
+            intent.setComponent(new ComponentName("android", 
+                    "com.android.internal.app.FakeLicenseActivity"));
+                    
+            // Ensure the intent starts a clean task so the app doesn't get confused
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
         WindowProcessController callerApp = null;
         if (caller != null) {
             callerApp = mService.getProcessController(caller);
